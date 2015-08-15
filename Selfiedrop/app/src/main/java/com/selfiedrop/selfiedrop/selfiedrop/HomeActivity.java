@@ -1,29 +1,106 @@
 package com.selfiedrop.selfiedrop.selfiedrop;
 
+import android.content.res.Configuration;
+
+import android.support.design.internal.ScrimInsetsFrameLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.selfiedrop.selfiedrop.selfiedrop.adapters.FragmentsAdapter;
 import com.selfiedrop.selfiedrop.selfiedrop.fragments.FragHome;
 
 public class HomeActivity extends AppCompatActivity {
 
-    String p = "";
-    String a;
+    private ScrimInsetsFrameLayout sifl;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
+    private ListView ndList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.drawer_home_activity);
 
         /**  App bar  **/
         Toolbar toolbar = (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         //getSupportActionBar().setTitle("Other title");
+
+        /**Referencia al crimInsetsFrameLayout**/
+        sifl = (ScrimInsetsFrameLayout)findViewById(R.id.scrimInsetsFrameLayout);
+
+        /**Menu del Navigation Drawer (ListView)**/
+        ndList = (ListView)findViewById(R.id.navdrawerlist);
+
+        final String[] opciones = new String[]{"Option 1", "Option 2", "Option 3"};
+
+        ArrayAdapter<String> ndMenuAdapter =
+                new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1, opciones);
+        /**ArrayAdapter<String> ndMenuAdapter =
+         new ArrayAdapter<>(this,android.R.layout.simple_list_item1, opciones);**/
+        ndList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        Snackbar.make(view, "Option 1", Snackbar.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        Snackbar.make(view, "Option 2", Snackbar.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        Snackbar.make(view, "Option 3", Snackbar.LENGTH_SHORT).show();
+                        break;
+                    default:
+                }
+                ndList.setItemChecked(position, true);
+
+                getSupportActionBar().setTitle(opciones[position]);
+
+                drawerLayout.closeDrawer(sifl);
+                }
+        });
+        ndList.setAdapter(ndMenuAdapter);
+
+        //Drawer Layout
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+
+        drawerLayout.setStatusBarBackgroundColor(
+                getResources().getColor(R.color.color_primary_dark));
+
+        drawerToggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer){
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+
+        drawerLayout.setDrawerListener(drawerToggle);
+        /** To show navdrawer icon on appbar and open drawer with this button **/
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
 
         /**  ViewPager  get viewpager from id and set adapter**/
         ViewPager viewPager = (ViewPager)findViewById(R.id.content_viewPager);
@@ -62,7 +139,22 @@ public class HomeActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 }

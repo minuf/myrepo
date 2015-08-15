@@ -1,4 +1,4 @@
-<net.sgoliver.android.navigationdrawer.ScrimInsetsFrameLayout
+<android.support.design.internal.ScrimInsetsFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -33,5 +33,4 @@
             android:choiceMode="singleChoice" />
 
     </LinearLayout>
-
-</net.sgoliver.android.navigationdrawer.ScrimInsetsFrameLayout>
+</android.support.design.internal.ScrimInsetsFrameLayout>
