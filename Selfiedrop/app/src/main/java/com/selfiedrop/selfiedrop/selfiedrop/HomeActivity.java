@@ -13,6 +13,7 @@ import com.selfiedrop.selfiedrop.selfiedrop.fragments.FragHome;
 
 public class HomeActivity extends AppCompatActivity {
 
+    String p = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
