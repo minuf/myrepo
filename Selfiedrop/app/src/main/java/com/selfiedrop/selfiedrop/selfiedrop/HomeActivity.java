@@ -14,6 +14,7 @@ import com.selfiedrop.selfiedrop.selfiedrop.fragments.FragHome;
 public class HomeActivity extends AppCompatActivity {
 
     String p = "";
+    String a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
