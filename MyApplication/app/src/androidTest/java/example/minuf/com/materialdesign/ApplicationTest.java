@@ -1,4 +1,4 @@
-package example.minuf.com.myapplication;
+package example.minuf.com.materialdesign;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

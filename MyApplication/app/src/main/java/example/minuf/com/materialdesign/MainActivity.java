@@ -1,4 +1,4 @@
-package example.minuf.com.myapplication;
+package example.minuf.com.materialdesign;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.0"
 
     defaultConfig {
-        applicationId "example.minuf.com.myapplication"
+        applicationId "example.minuf.com.materialdesign"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
