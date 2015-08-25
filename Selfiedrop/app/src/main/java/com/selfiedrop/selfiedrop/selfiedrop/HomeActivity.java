@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //getSupportActionBar().setTitle("Other title");
 
-        /**Referencia al crimInsetsFrameLayout**/
+        /**Referencia al ScrimInsetsFrameLayout**/
         sifl = (ScrimInsetsFrameLayout)findViewById(R.id.scrimInsetsFrameLayout);
 
         /**Menu del Navigation Drawer (ListView)**/
