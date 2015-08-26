@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.minuf.example.material.R;
@@ -43,7 +44,6 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ItemVi
 
         return holder;
 
-
     }
 
     @Override
@@ -65,6 +65,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ItemVi
         //create views
         private TextView tv_title, tv_subtitle;
         private RoundedImageView iv_image;
+        private ImageView iv_image2;
 
         //Holder constructor, initialize views
         public ItemViewHolder(View itemView) {
@@ -72,6 +73,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ItemVi
             iv_image = (RoundedImageView)itemView.findViewById(R.id.item_photo);
             tv_title = (TextView)itemView.findViewById(R.id.item_title);
             tv_subtitle = (TextView)itemView.findViewById(R.id.item_subtitle);
+            iv_image2 = (ImageView)itemView.findViewById(R.id.imageView1);
         }
         //custom method for bind view with text content, that can be writted on override method 'onBindViewHolder()', but it only call this method for cleaner code
         public void bindItem(ItemList1_Structure item) {
@@ -80,16 +82,31 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ItemVi
 
             iv_image.setImageBitmap(icon);*/
 
-            //iv_image.setImageResource(item.getImage());
-
-
-            //CON IMAGENES DEMASIADO GRANDES LANZA UN ERROR EN LA CLASE ROUNDEDIMAGEVIEW...algun conflicto al convertir a bitmap
-            Picasso.with(context)
-                    .load("http://blog.dictionary.com/wp-content/uploads/2013/11/selfie_big.jpg")
-                    .into(iv_image);
+            iv_image.setImageResource(item.getImage());
 
             tv_title.setText(item.getTitle());
             tv_subtitle.setText(item.getSubtitle());
+
+
+            //LIBRERIA PICASSO
+            //CON IMAGENES DEMASIADO GRANDES LANZA UN ERROR EN LA CLASE ROUNDEDIMAGEVIEW...algun conflicto al convertir a bitmap
+            Picasso.with(context)
+                    .load("http://whosbehindmask.weebly.com/uploads/2/8/3/6/28365549/5831103_orig.jpg")    //http://viralandscdn.net/posts/13668/image-sg3SqUON.jpg
+                    .into(iv_image2);
+
+            //MUESTRA UN INDICADOR EN LA ESQUINA SUPERIOR IZQUIERDA CON COLOR INDICANDO DE DONDE PROVIENE LA IMAGEN:
+            //  ROJO = NETWORK,     AZUL = DISK,    VERDE = MEMORY
+            Picasso.with(context).setIndicatorsEnabled(true);
+
+            /***        //EJEMPLO LIBRERIA PICASSO, LEER IMAGEN DE INTERNET, LEER DEL HOLDER, ASIGNAR IMAGEN DE ERROR, REDIMENSIONAR IMAGEN Y ROTAR IMAGEN
+            Picasso.with(this)
+                    .load("YOUR IMAGE URL HERE")
+                    .placeholder(R.drawable.ic_placeholder)   // optional
+                    .error(R.drawable.ic_error_fallback)      // optional
+                    .resize(250, 200)                        // optional
+                    .rotate(90)                             // optional
+                    .into(imageView);
+             *///
         }
     }
 }

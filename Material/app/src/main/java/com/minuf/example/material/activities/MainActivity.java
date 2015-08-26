@@ -16,11 +16,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.minuf.example.material.R;
 import com.minuf.example.material.adapters.FragmentsAdapter;
 import com.minuf.example.material.fragments.Frag_list_main;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -126,6 +128,15 @@ public class MainActivity extends AppCompatActivity {
         });
         ndList.setAdapter(ndMenuAdapter);
 
+        /** LOAD IMAGE FROM URL WITH PICASSO LIBRARY  **/
+        ImageView iv_drawer = (ImageView)findViewById(R.id.iv_drawer);
+
+        Picasso.with(this)
+                .load("http://whosbehindmask.weebly.com/uploads/2/8/3/6/28365549/5831103_orig.jpg")    //http://viralandscdn.net/posts/13668/image-sg3SqUON.jpg
+                .into(iv_drawer);
+
+        /**********         **************/
+        Picasso.with(this).setIndicatorsEnabled(true);
         //Drawer Layout
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
