@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         Snackbar.make(view, "Option 1", Snackbar.LENGTH_SHORT).show();
-                        break;
+                        break; 
                     case 1:
                         Snackbar.make(view, "Option 2", Snackbar.LENGTH_SHORT).show();
                         break;
