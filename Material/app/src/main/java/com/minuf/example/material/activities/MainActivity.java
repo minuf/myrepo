@@ -30,15 +30,65 @@ public class MainActivity extends AppCompatActivity {
     private ListView ndList;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_main_activity);
 
+        showAppBarAndNavigationDrawer();
+        showViewPagerAndTabLayout();
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    /************************************
+     *                  CUSTOM METHODS FOR CREATE UI STRUCTURE
+     *                              *********************************************/
+
+    public void showAppBarAndNavigationDrawer() {
         /**  App bar  **/
         Toolbar toolbar = (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         //getSupportActionBar().setTitle("Other title");
+
+        /********   Navigation Drawer  ********/
 
         /**Referencia al ScrimInsetsFrameLayout**/
         sifl = (ScrimInsetsFrameLayout)findViewById(R.id.scrimInsetsFrameLayout);
@@ -100,9 +150,9 @@ public class MainActivity extends AppCompatActivity {
         /** To show navdrawer icon on appbar and open drawer with this button **/
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+    }
 
-
-
+    public void showViewPagerAndTabLayout() {
         /**  ViewPager  get viewpager from id and set adapter**/
         ViewPager viewPager = (ViewPager)findViewById(R.id.content_viewPager);
         FragmentsAdapter adapter = new FragmentsAdapter(getSupportFragmentManager());
@@ -122,43 +172,7 @@ public class MainActivity extends AppCompatActivity {
         //change color and height to selected tab indicator
         tabs.setSelectedTabIndicatorColor(Color.WHITE);
         tabs.setSelectedTabIndicatorHeight(15);
-
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        drawerToggle.onConfigurationChanged(newConfig);
-    }
+    /******************     END METHODS     ****************/
 }
