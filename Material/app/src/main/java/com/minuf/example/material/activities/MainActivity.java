@@ -1,8 +1,10 @@
 package com.minuf.example.material.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.support.design.internal.ScrimInsetsFrameLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private ListView ndList;
-
+    private FloatingActionButton btnFab;
 
 
     @Override
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         Snackbar.make(view, "Option 1", Snackbar.LENGTH_SHORT).show();
-                        break; 
+                        break;
                     case 1:
                         Snackbar.make(view, "Option 2", Snackbar.LENGTH_SHORT).show();
                         break;
@@ -134,7 +136,15 @@ public class MainActivity extends AppCompatActivity {
         Picasso.with(this)
                 .load("http://whosbehindmask.weebly.com/uploads/2/8/3/6/28365549/5831103_orig.jpg")    //http://viralandscdn.net/posts/13668/image-sg3SqUON.jpg
                 .into(iv_drawer);
-
+        //AND SET LISTENER TO THAT VIEW FOR START PROFILE ACTIVITY
+        iv_drawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(sifl);
+            }
+        });
         /**********         **************/
         Picasso.with(this).setIndicatorsEnabled(true);
         //Drawer Layout
