@@ -1,8 +1,11 @@
 package com.minuf.example.material.activities;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.design.internal.ScrimInsetsFrameLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -133,19 +136,43 @@ public class MainActivity extends AppCompatActivity {
         /** LOAD IMAGE FROM URL WITH PICASSO LIBRARY  **/
         ImageView iv_drawer = (ImageView)findViewById(R.id.iv_drawer);
 
+        if (Build.getRadioVersion().equals(Build.VERSION_CODES.LOLLIPOP)){}
         Picasso.with(this)
                 .load("http://whosbehindmask.weebly.com/uploads/2/8/3/6/28365549/5831103_orig.jpg")    //http://viralandscdn.net/posts/13668/image-sg3SqUON.jpg
                 .into(iv_drawer);
+
         //AND SET LISTENER TO THAT VIEW FOR START PROFILE ACTIVITY
-        iv_drawer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(sifl);
-            }
-        });
+        final Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+
+        int sdk = Build.VERSION.SDK_INT;
+
+        if (sdk >= Build.VERSION_CODES.LOLLIPOP) {
+            iv_drawer.setOnClickListener(new View.OnClickListener() {
+
+                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                @Override
+                public void onClick(View v) {
+
+                    ActivityOptions options = ActivityOptions
+                            .makeSceneTransitionAnimation(MainActivity.this, v, v.getTransitionName());
+
+                    startActivity(intent, options.toBundle());
+
+                    drawerLayout.closeDrawer(sifl);
+                }
+            });
+        } else {
+            iv_drawer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(intent);
+                    drawerLayout.closeDrawer(sifl);
+                }
+            });
+        }
         /**********         **************/
+
+
         Picasso.with(this).setIndicatorsEnabled(true);
         //Drawer Layout
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
