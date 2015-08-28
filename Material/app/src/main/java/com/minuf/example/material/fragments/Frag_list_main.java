@@ -2,6 +2,7 @@ package com.minuf.example.material.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.minuf.example.material.R;
 import com.minuf.example.material.adapters.MainListAdapter;
@@ -44,7 +46,7 @@ public class Frag_list_main extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // get the recyclerview from her layout
-        RecyclerView list = (RecyclerView)inflater.inflate(R.layout.frag_list, container, false);
+        final RecyclerView list = (RecyclerView)inflater.inflate(R.layout.frag_list, container, false);
 
         // get the items count from bundle
         int itemsCount = getArguments().getInt(ITEMS_COUNT_KEY);
@@ -53,7 +55,14 @@ public class Frag_list_main extends Fragment {
         for (int i=0; i<itemsCount; i++){
             arrayData.add(new ItemList1_Structure(R.drawable.selfie2, "Title "+(i+1), "Subtitle "+(i+1), i+1));
         }
+        //CREATE ADAPTER, SETS ONCLICK AND SETS TO LIST
         MainListAdapter adapter = new MainListAdapter(arrayData);
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Pulsado el item: " + list.getChildAdapterPosition(v), Snackbar.LENGTH_SHORT).show();
+            }
+        });
         list.setAdapter(adapter);
 
         //sets the layout manager, decoration and animation for correcty implementation of recyclerview ( recycler require that)

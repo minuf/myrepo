@@ -36,13 +36,14 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private ListView ndList;
-    private FloatingActionButton btnFab;
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        drawerLayout.closeDrawer(sifl);
+        if(drawerLayout.isShown()) {
+            drawerLayout.closeDrawer(sifl);
+        }
     }
 
     @Override
@@ -143,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
         /** LOAD IMAGE FROM URL WITH PICASSO LIBRARY  **/
         final ImageView iv_drawer = (ImageView)findViewById(R.id.iv_drawer);
 
-        if (Build.getRadioVersion().equals(Build.VERSION_CODES.LOLLIPOP)){}
         Picasso.with(this)
                 .load("http://whosbehindmask.weebly.com/uploads/2/8/3/6/28365549/5831103_orig.jpg")    //http://viralandscdn.net/posts/13668/image-sg3SqUON.jpg
                 .into(iv_drawer);
@@ -164,15 +164,12 @@ public class MainActivity extends AppCompatActivity {
                             .makeSceneTransitionAnimation(MainActivity.this, v, v.getTransitionName());
 
                     startActivity(intent, options.toBundle());
-
-                    //drawerLayout.closeDrawer(sifl);
                 }
             });
         } else {
             iv_drawer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    drawerLayout.closeDrawer(sifl);
                     startActivity(intent);
 
                 }
@@ -207,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
     }
+
 
     public void showViewPagerAndTabLayout() {
         /**  ViewPager  get viewpager from id and set adapter**/

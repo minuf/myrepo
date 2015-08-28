@@ -57,6 +57,7 @@
         app:layout_anchor="@id/appbarLayout"
         app:layout_anchorGravity="bottom|right|end"
         android:src="@drawable/ic_fab_up"
-        app:borderWidth="0dp" />
+        app:borderWidth="0dp"
+        android:visibility="invisible"/>
 
 </android.support.design.widget.CoordinatorLayout>

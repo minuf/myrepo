@@ -21,7 +21,7 @@ import java.util.ArrayList;
 /**
  * Created by jorge on 14/08/15.
  */
-public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ItemViewHolder> {
+public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ItemViewHolder> implements View.OnClickListener{
 
     private ArrayList<ItemList1_Structure> arrayData;
     private static Context context;
@@ -37,6 +37,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ItemVi
         //inflate the view and set to holder
         View itemView = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item1_list, viewGroup, false);
+
+        itemView.setOnClickListener(this);
 
         ItemViewHolder holder = new ItemViewHolder(itemView);
 
@@ -58,6 +60,18 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ItemVi
     public int getItemCount() {
         //get the total of items count
         return arrayData.size();
+    }
+
+    private View.OnClickListener listener;
+
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(listener != null)
+            listener.onClick(view);
     }
 
     // subclass for Holder the views (required on ReciclerView)
