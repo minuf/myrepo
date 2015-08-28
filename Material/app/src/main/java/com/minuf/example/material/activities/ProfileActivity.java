@@ -15,9 +15,7 @@ import android.widget.ImageView;
 
 import com.minuf.example.material.R;
 import com.minuf.example.material.adapters.List2_Profile_Adapter;
-import com.minuf.example.material.adapters.MainListAdapter;
 import com.minuf.example.material.anim_deco.DividerItemDecoration;
-import com.minuf.example.material.items_struc.ItemList1_Structure;
 import com.minuf.example.material.items_struc.ItemList2_Structure;
 import com.squareup.picasso.Picasso;
 
@@ -35,7 +33,15 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        //Floating Action Button
+        /** LOAD IMAGE FROM URL WITH PICASSO LIBRARY  **/
+        ImageView iv_profile = (ImageView)findViewById(R.id.iv_profileToolbar);
+
+        Picasso.with(this)
+                .load("http://whosbehindmask.weebly.com/uploads/2/8/3/6/28365549/5831103_orig.jpg")    //http://viralandscdn.net/posts/13668/image-sg3SqUON.jpg
+                .into(iv_profile);
+        /*************      ***********/
+
+        /******  Floating Action Button      **************/
         btnFab = (FloatingActionButton)findViewById(R.id.btnFab);
         btnFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,12 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
         list.setItemAnimator(new DefaultItemAnimator());
         list.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 
-        /** LOAD IMAGE FROM URL WITH PICASSO LIBRARY  **/
-        ImageView iv_profile = (ImageView)findViewById(R.id.iv_profileToolbar);
 
-        Picasso.with(this)
-                .load("http://whosbehindmask.weebly.com/uploads/2/8/3/6/28365549/5831103_orig.jpg")    //http://viralandscdn.net/posts/13668/image-sg3SqUON.jpg
-                .into(iv_profile);
     }
 
     @Override

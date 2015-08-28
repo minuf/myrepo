@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.design.internal.ScrimInsetsFrameLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -37,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private ListView ndList;
     private FloatingActionButton btnFab;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        drawerLayout.closeDrawer(sifl);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         ndList.setAdapter(ndMenuAdapter);
 
         /** LOAD IMAGE FROM URL WITH PICASSO LIBRARY  **/
-        ImageView iv_drawer = (ImageView)findViewById(R.id.iv_drawer);
+        final ImageView iv_drawer = (ImageView)findViewById(R.id.iv_drawer);
 
         if (Build.getRadioVersion().equals(Build.VERSION_CODES.LOLLIPOP)){}
         Picasso.with(this)
@@ -156,17 +163,19 @@ public class MainActivity extends AppCompatActivity {
                     ActivityOptions options = ActivityOptions
                             .makeSceneTransitionAnimation(MainActivity.this, v, v.getTransitionName());
 
+
                     startActivity(intent, options.toBundle());
 
-                    drawerLayout.closeDrawer(sifl);
+                    //drawerLayout.closeDrawer(sifl);
                 }
             });
         } else {
             iv_drawer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(intent);
                     drawerLayout.closeDrawer(sifl);
+                    startActivity(intent);
+
                 }
             });
         }
