@@ -4,7 +4,26 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
+        <!-- enable window content transitions -->
         <item name="android:windowContentTransitions">true</item>
+
+        <!-- specify enter and exit transitions
+        <item name="android:windowEnterTransition">@transition/explode</item>
+        <item name="android:windowExitTransition">@transition/explode</item> -->
+
+        <!-- Estados Entrada-Salida  -->
+        <item name="android:windowEnterTransition">@transition/slide_transition</item>
+        <item name="android:windowExitTransition">@transition/fade_transition</item>
+
+        <!-- Estados Reingreso-Retorno -->
+        <item name="android:windowReenterTransition">@transition/fade_transition</item>
+        <item name="android:windowReturnTransition">@transition/fade_transition</item>
+
+        <!-- specify shared element transitions
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_image_transform</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/change_image_transform</item> -->
 
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>

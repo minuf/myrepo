@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+    <slide
+        android:duration="900"
+        android:slideEdge="right"
+        android:interpolator="@android:interpolator/overshoot"/>
+</transitionSet>
+
+
+    <!-- el parametro :
+     android:interpolator="@android:interpolator/anticipate_overshoot"
+        hace que se anticipe el layout a la imagen
+        retrocediendo un poco al final, tipo ayyy q no llego ay que me paso....
+
+        ESTE OTRO HACE LO MISMO UN POCO MAS LENTO, NO SE ANTICIPA
+     android:interpolator="@android:interpolator/overshoot"
+         ESTA MUY GUAPO -->
