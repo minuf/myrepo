@@ -235,9 +235,14 @@ public class MainActivity extends AppCompatActivity {
         tabs.getTabAt(2).setText("TAB 3");
         //change color and height to selected tab indicator
         tabs.setSelectedTabIndicatorColor(Color.WHITE);
-        tabs.setSelectedTabIndicatorHeight(15);
+        tabs.setSelectedTabIndicatorHeight(12);
     }
 
+    /** SET COLOR FOR STATUSBAR USING STATUSBARTINT LIBRARY
+     * FOR LESS LOLLIPOP VERSION AND NATIVE FOR LOLLIPOP OR OVER
+      */
+
+    /*TARGET API PRE-LOLLIPOP*/
     public void showStatusBarTint(){
 
         if (DEVICE_SDK >= Build.VERSION_CODES.KITKAT && DEVICE_SDK < Build.VERSION_CODES.LOLLIPOP) {
@@ -258,11 +263,6 @@ public class MainActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(Color.RED);
-    }
-
-    public void addBitmapExtraToIntent(Intent intent){
-        Bitmap bitmap = ((BitmapDrawable)iv_drawer.getDrawable()).getBitmap();
-        intent.putExtra("IMAGE_BITMAP", bitmap);
     }
 
     /******************     END UI METHODS     ****************/

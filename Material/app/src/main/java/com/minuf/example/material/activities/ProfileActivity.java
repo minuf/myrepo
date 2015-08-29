@@ -1,18 +1,13 @@
 package com.minuf.example.material.activities;
 
 import android.annotation.TargetApi;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,9 +20,7 @@ import android.widget.ImageView;
 
 import com.minuf.example.material.R;
 import com.minuf.example.material.adapters.List2_Profile_Adapter;
-import com.minuf.example.material.adapters.MainListAdapter;
 import com.minuf.example.material.anim_deco.DividerItemDecoration;
-import com.minuf.example.material.items_struc.ItemList1_Structure;
 import com.minuf.example.material.items_struc.ItemList2_Structure;
 import com.squareup.picasso.Picasso;
 
@@ -114,6 +107,8 @@ public class ProfileActivity extends AppCompatActivity {
         window.setStatusBarColor(Color.RED);
     }
     public void getProminentColorFromImage(){
+
+        //DONT WORKS -------------------
 
        /** Bitmap bitmap = ((BitmapDrawable)iv_profile.getDrawable()).getBitmap();
 
