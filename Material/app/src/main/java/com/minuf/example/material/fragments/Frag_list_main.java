@@ -60,7 +60,7 @@ public class Frag_list_main extends Fragment {
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Pulsado el item: " + list.getChildAdapterPosition(v), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(v, "Pulsado el item: " + (1+list.getChildAdapterPosition(v)), Snackbar.LENGTH_SHORT).show();
             }
         });
         list.setAdapter(adapter);

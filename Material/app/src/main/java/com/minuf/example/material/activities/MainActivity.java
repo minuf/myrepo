@@ -4,11 +4,12 @@ import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.internal.ScrimInsetsFrameLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -19,15 +20,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.minuf.example.material.R;
 import com.minuf.example.material.adapters.FragmentsAdapter;
 import com.minuf.example.material.fragments.Frag_list_main;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private ListView ndList;
+    private ImageView iv_drawer;
+
+    private final int DEVICE_SDK = Build.VERSION.SDK_INT;
 
     @Override
     protected void onResume() {
@@ -50,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_main_activity);
+
+
+             showStatusBarTint();
+
 
         showAppBarAndNavigationDrawer();
         showViewPagerAndTabLayout();
@@ -142,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         ndList.setAdapter(ndMenuAdapter);
 
         /** LOAD IMAGE FROM URL WITH PICASSO LIBRARY  **/
-        final ImageView iv_drawer = (ImageView)findViewById(R.id.iv_drawer);
+        iv_drawer = (ImageView)findViewById(R.id.iv_drawer);
 
         Picasso.with(this)
                 .load("http://whosbehindmask.weebly.com/uploads/2/8/3/6/28365549/5831103_orig.jpg")    //http://viralandscdn.net/posts/13668/image-sg3SqUON.jpg
@@ -151,9 +161,9 @@ public class MainActivity extends AppCompatActivity {
         //AND SET LISTENER TO THAT VIEW FOR START PROFILE ACTIVITY
         final Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
 
-        int sdk = Build.VERSION.SDK_INT;
 
-        if (sdk >= Build.VERSION_CODES.LOLLIPOP) {
+
+        if (DEVICE_SDK >= Build.VERSION_CODES.LOLLIPOP) {
             iv_drawer.setOnClickListener(new View.OnClickListener() {
 
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -228,5 +238,32 @@ public class MainActivity extends AppCompatActivity {
         tabs.setSelectedTabIndicatorHeight(15);
     }
 
-    /******************     END METHODS     ****************/
+    public void showStatusBarTint(){
+
+        if (DEVICE_SDK >= Build.VERSION_CODES.KITKAT && DEVICE_SDK < Build.VERSION_CODES.LOLLIPOP) {
+            // create manager instance after the content view is set
+            SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+            // enable status bar tint
+            mTintManager.setStatusBarTintEnabled(true);
+            //mTintManager.setStatusBarTintColor(Color.parseColor("#388E3C"));
+            mTintManager.setTintColor(Color.parseColor("#388E3C"));
+        } else if (DEVICE_SDK >= Build.VERSION_CODES.LOLLIPOP) {
+            setStatusBarColorLOLLIPOP();
+        }
+
+    }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void setStatusBarColorLOLLIPOP() {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(Color.RED);
+    }
+
+    public void addBitmapExtraToIntent(Intent intent){
+        Bitmap bitmap = ((BitmapDrawable)iv_drawer.getDrawable()).getBitmap();
+        intent.putExtra("IMAGE_BITMAP", bitmap);
+    }
+
+    /******************     END UI METHODS     ****************/
 }

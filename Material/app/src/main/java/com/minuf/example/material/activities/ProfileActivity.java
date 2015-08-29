@@ -1,18 +1,26 @@
 package com.minuf.example.material.activities;
 
+import android.annotation.TargetApi;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.minuf.example.material.R;
@@ -32,13 +40,19 @@ public class ProfileActivity extends AppCompatActivity {
 
     private FloatingActionButton btnFab;
 
+    private final int DEVICE_SDK = Build.VERSION.SDK_INT;
+    ImageView iv_profile;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        if (DEVICE_SDK >= Build.VERSION_CODES.LOLLIPOP) setStatusBarColorLOLLIPOP();
+
         /** LOAD IMAGE FROM URL WITH PICASSO LIBRARY  **/
-        ImageView iv_profile = (ImageView)findViewById(R.id.iv_profileToolbar);
+        iv_profile = (ImageView)findViewById(R.id.iv_profileToolbar);
 
         Picasso.with(this)
                 .load("http://whosbehindmask.weebly.com/uploads/2/8/3/6/28365549/5831103_orig.jpg")    //http://viralandscdn.net/posts/13668/image-sg3SqUON.jpg
@@ -90,5 +104,29 @@ public class ProfileActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void setStatusBarColorLOLLIPOP() {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(Color.RED);
+    }
+    public void getProminentColorFromImage(){
+
+       /** Bitmap bitmap = ((BitmapDrawable)iv_profile.getDrawable()).getBitmap();
+
+        // Synchronous
+        Palette p = Palette.from(bitmap).generate();
+
+        int color = p.getVibrantColor(Color.BLUE); */
+
+        /*// Asynchronous
+        Palette.from(bitmap).generate(new PaletteAsyncListener() {
+            public void onGenerated(Palette p) {
+                // Use generated instance
+            }
+        });*/
     }
 }
