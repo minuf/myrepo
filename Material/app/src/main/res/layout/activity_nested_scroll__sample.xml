@@ -1,27 +1,27 @@
 <android.support.design.widget.CoordinatorLayout
+    android:id="@+id/cl2"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity" >
+    tools:context=".NestedActivity" >
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbarLayout"
+        android:id="@+id/appbarLayout2"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/ctlLayout"
+            android:id="@+id/ctlLayout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="?attr/colorPrimary"
-            >
+            app:contentScrim="?attr/colorPrimary">
 
             <ImageView
-                android:id="@+id/iv_profileToolbar"
+                android:id="@+id/iv_profileToolbar2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -32,7 +32,7 @@
             <android.support.v7.widget.Toolbar
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/app_bar2"
+                android:id="@+id/app_bar3"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_width="match_parent"
                 android:minHeight="?attr/actionBarSize"
@@ -45,40 +45,31 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:foreground="@drawable/header_shadow">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_profile"
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested"
+        android:layout_height="500dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        android:foreground="@drawable/header_shadow"/>
-    </FrameLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_anchor="@id/appbarLayout"
-        app:layout_anchorGravity="bottom|right|end"
-        android:src="@drawable/ic_fab_up"
-        app:borderWidth="0dp"
-        android:clipToPadding="false"
-        android:elevation="20dp"
-        tools:ignore="UnusedAttribute"/>
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnFab2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:layout_anchor="@id/appbarLayout"
-        app:layout_anchorGravity="bottom|center"
-        app:borderWidth="0dp"
-        android:clipToPadding="false"
-        tools:ignore="UnusedAt"
-        app:backgroundTint="@color/color_primary"/>
+        app:layout_anchor="@id/appbarLayout2"
+        app:layout_anchorGravity="bottom|right|end"
+        android:src="@drawable/ic_fab_up"
+        app:borderWidth="0dp"  />
 
 </android.support.design.widget.CoordinatorLayout>

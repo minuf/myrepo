@@ -5,6 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="openDrawer">Open drawer</string>
     <string name="closeDrawer">Close Drawer</string>
+    <string name="title_activity_activity__nested_scroll__sample">Activity_NestedScroll_Sample
+    </string>
+    <string name="title_activity_activity__full_screen_photo">Activity_FullScreenPhoto</string>
 
 
 </resources>

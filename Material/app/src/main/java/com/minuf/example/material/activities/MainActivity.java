@@ -2,6 +2,7 @@ package com.minuf.example.material.activities;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -9,7 +10,9 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.internal.ScrimInsetsFrameLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private ListView ndList;
     private ImageView iv_drawer;
+    private CoordinatorLayout cl;
 
     private final int DEVICE_SDK = Build.VERSION.SDK_INT;
 
@@ -170,10 +174,21 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    ActivityOptions options = ActivityOptions
+                    final ActivityOptions options = ActivityOptions
                             .makeSceneTransitionAnimation(MainActivity.this, v, v.getTransitionName());
 
-                    startActivity(intent, options.toBundle());
+                    drawerLayout.closeDrawer(sifl);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(intent, options.toBundle());  // For starting an activity
+
+                            // Or for doing a fragment transaction
+                            // fragmentTransaction.commit();
+                        }
+                    }, 310);
+
                 }
             });
         } else {
@@ -240,18 +255,28 @@ public class MainActivity extends AppCompatActivity {
 
     /** SET COLOR FOR STATUSBAR USING STATUSBARTINT LIBRARY
      * FOR LESS LOLLIPOP VERSION AND NATIVE FOR LOLLIPOP OR OVER
-      */
+     *
+     CAUTION: With StatusBarTint library usage, CHANGE STATUS BAR FOR ALL SYSTEM (ALL APP ACTIVITIES) */
 
     /*TARGET API PRE-LOLLIPOP*/
     public void showStatusBarTint(){
 
         if (DEVICE_SDK >= Build.VERSION_CODES.KITKAT && DEVICE_SDK < Build.VERSION_CODES.LOLLIPOP) {
+            //FOR SHOW STATUSBAR COORECTLY WITH COORDINATORLAYOUT AND APPBAR, NEEDS TO SET PADDING (STATUSBAR HEIGHT) TO COORDINATORLAYOUT
+            int statusBarHeight = getStatusBarHeight(); //CUSTOM METHOD FOR GET STATBAR HEIGHT IN PIXELS
+            cl = (CoordinatorLayout)findViewById(R.id.coordlayout);
+            cl.setPadding(0,statusBarHeight,0,0); //SET TOP PADDING IN PIXELS TO COORDINATORLAYOUT
+
+
+                    /////////////////////
+            /** SYSTEM BAR TINT LIBRARY  for pre-lollipop**/
             // create manager instance after the content view is set
             SystemBarTintManager mTintManager = new SystemBarTintManager(this);
             // enable status bar tint
             mTintManager.setStatusBarTintEnabled(true);
             //mTintManager.setStatusBarTintColor(Color.parseColor("#388E3C"));
-            mTintManager.setTintColor(Color.parseColor("#388E3C"));
+            mTintManager.setTintColor(Color.parseColor("#4CAF50"));//LIKE PRIMARY DARK COLOR
+                        /*************/
         } else if (DEVICE_SDK >= Build.VERSION_CODES.LOLLIPOP) {
             setStatusBarColorLOLLIPOP();
         }
@@ -264,6 +289,16 @@ public class MainActivity extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(Color.RED);
     }
+    //GETS STATUSBARHEIGHT IN PIXELS
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
 
     /******************     END UI METHODS     ****************/
 }
