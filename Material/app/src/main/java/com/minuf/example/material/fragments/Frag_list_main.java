@@ -67,8 +67,8 @@ public class Frag_list_main extends Fragment {
 
         //sets the layout manager, decoration and animation for correcty implementation of recyclerview ( recycler require that)
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        list.setItemAnimator(new DefaultItemAnimator());
-        list.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        //list.setItemAnimator(new DefaultItemAnimator());
+        //list.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 
         return list;
     }

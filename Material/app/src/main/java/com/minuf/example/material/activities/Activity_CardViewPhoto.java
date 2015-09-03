@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,31 +14,24 @@ import android.widget.ImageView;
 import com.minuf.example.material.R;
 import com.squareup.picasso.Picasso;
 
-public class Activity_FullScreenPhoto extends AppCompatActivity {
-
-    FloatingActionButton fab;
-
+public class Activity_CardViewPhoto extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity__full_screen_photo);
+        setContentView(R.layout.ctivity__card_view_photo);
 
-        ImageView iv_photo = (ImageView)findViewById(R.id.imageView_fullscreen);
-
-        fab = (FloatingActionButton)findViewById(R.id.btnFabToCardViewAvtivity);
+        ImageView iv_photo = (ImageView)findViewById(R.id.iv_cardViewPhoto);
 
         Picasso.with(this)
                 .load("http://whosbehindmask.weebly.com/uploads/2/8/3/6/28365549/5831103_orig.jpg")    //http://viralandscdn.net/posts/13668/image-sg3SqUON.jpg
                 .into(iv_photo);
-
-        nextActivityWithSharedElement();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_activity__full_screen_photo, menu);
+        getMenuInflater().inflate(R.menu.menu_activity__card_view_photo, menu);
         return true;
     }
 
@@ -58,26 +50,5 @@ public class Activity_FullScreenPhoto extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void nextActivityWithSharedElement() {
-        final Intent intent = new Intent(Activity_FullScreenPhoto.this, Activity_CardViewPhoto.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            fab.setOnClickListener(new View.OnClickListener() {
-                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-                @Override
-                public void onClick(View v) {
-                    /*ActivityOptions options = ActivityOptions
-                            .makeSceneTransitionAnimation(Activity_FullScreenPhoto.this, v, v.getTransitionName());*/
 
-                    startActivity(intent);
-                }
-            });
-        } else {
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(intent);
-                }
-            });
-        }
-    }
 }

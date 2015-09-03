@@ -1,0 +1,74 @@
+<LinearLayout
+    android:layout_marginTop="30dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/tv_currentelevation"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+
+
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            style="@style/ms9_DefaultShadowStyle"
+            android:id="@+id/shadow_item_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ms9_shadowTranslationZ="2dp"
+            app:ms9_shadowElevation="4dp"
+            android:layout_marginLeft="30dp"
+            >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button"
+            android:layout_margin="16dp"
+            />
+        </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            style="@style/ms9_DefaultShadowStyle"
+            android:id="@+id/shadow_item_container2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ms9_shadowTranslationZ="2dp"
+            app:ms9_shadowElevation="4dp"
+            android:layout_marginLeft="30dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/button2"
+                android:layout_margin="16dp"
+
+                />
+        </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+    </LinearLayout>
+</LinearLayout>

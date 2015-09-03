@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         /**Menu del Navigation Drawer (ListView)**/
         ndList = (ListView)findViewById(R.id.navdrawerlist);
 
-        final String[] opciones = new String[]{"Option 1", "Option 2", "Option 3"};
+        final String[] opciones = new String[]{"Elevation pre-L sample", "Staggered Grid Layout Sample", "Option 3"};
 
         ArrayAdapter<String> ndMenuAdapter =
                 new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1, opciones);
@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         Snackbar.make(view, "Option 1", Snackbar.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, Activity_ElevationShadow_NinePath_Sample.class));
                         break;
                     case 1:
                         Snackbar.make(view, "Option 2", Snackbar.LENGTH_SHORT).show();

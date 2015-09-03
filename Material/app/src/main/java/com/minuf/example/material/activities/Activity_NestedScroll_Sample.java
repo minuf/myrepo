@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -25,12 +26,22 @@ public class Activity_NestedScroll_Sample extends AppCompatActivity {
 
 
     NestedScrollView nested;
+    LinearLayout ll_nestedContent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nested_scroll__sample);
 
+        ll_nestedContent = (LinearLayout)findViewById(R.id.ll);
 
+        ArrayList<Button> array_buttons = new ArrayList<>();
+
+        for (int i=0; i<30; i++){
+            array_buttons.add(new Button(this));
+            array_buttons.get(i).setText("Boton "+(i+1));
+
+            ll_nestedContent.addView(array_buttons.get(i));
+        }
 
     }
 

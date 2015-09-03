@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,32 +28,50 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ItemVi
     private ArrayList<ItemList1_Structure> arrayData;
     private static Context context;
 
+    View itemView;
+
     //constructor
     public MainListAdapter(ArrayList<ItemList1_Structure> arrayData) {
         //initialize array
         this.arrayData = arrayData;
     }
 
+    private int lastPosition = -1;
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         //inflate the view and set to holder
-        View itemView = LayoutInflater.from(viewGroup.getContext())
+        itemView = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item1_list, viewGroup, false);
 
         itemView.setOnClickListener(this);
+        context = viewGroup.getContext();
+
+
 
         ItemViewHolder holder = new ItemViewHolder(itemView);
 
-        context = viewGroup.getContext();
+
 
         return holder;
 
     }
 
+
     @Override
     public void onBindViewHolder(ItemViewHolder itemViewHolder, int i) {
+
+        //Animation animation = AnimationUtils.loadAnimation(context, (i > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        animation.setDuration(150);
+        itemViewHolder.itemView.startAnimation(animation);
+        lastPosition = i;
+
+
         //rescue item from her ArrayList position and bind calling custom method bindItem(item);
         ItemList1_Structure item = arrayData.get(i);
+
+
+
 
         itemViewHolder.bindItem(item);
     }

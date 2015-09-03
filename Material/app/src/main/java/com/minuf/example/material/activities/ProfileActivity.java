@@ -14,8 +14,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
@@ -41,6 +43,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     private final int DEVICE_SDK = Build.VERSION.SDK_INT;
     ImageView iv_profile;
+    RecyclerView list;
+
 
 
     @Override
@@ -71,20 +75,16 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             });
         } else {
-            startActivity(intent);
+            iv_profile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(intent);
+                }
+            });
         }
         /*************      ***********/
 
-        /******  Floating Action Button      **************/
-        btnFab = (FloatingActionButton)findViewById(R.id.btnFab);
-        btnFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Esto es una prueba", Snackbar.LENGTH_LONG).show();
-                Intent i = new Intent(ProfileActivity.this, Activity_NestedScroll_Sample.class);
-                startActivity(i);
-            }
-        });
+
 
         /**  App bar  **/
         Toolbar toolbar = (Toolbar)findViewById(R.id.app_bar2);
@@ -97,25 +97,45 @@ public class ProfileActivity extends AppCompatActivity {
         /**     LIST       **/
 
         // get the recyclerview from her layout
-        RecyclerView list = (RecyclerView)findViewById(R.id.list_profile);
+        list = (RecyclerView)findViewById(R.id.list_profile);
 
         // get the items count from bundle
         //int itemsCount = getArguments().getInt(ITEMS_COUNT_KEY);
         //create arraylist with all data objects and set to adapter to list for show it later in views
         ArrayList<ItemList2_Structure> arrayData = new ArrayList<>();
         for (int i=0; i<90; i++){
-            arrayData.add(new ItemList2_Structure("Titulo", "Subtitulo"));
+            arrayData.add(new ItemList2_Structure("Titulo "+(i+1), "Subtitulo "+(i+1)));
         }
         List2_Profile_Adapter adapter = new List2_Profile_Adapter(arrayData);
         list.setAdapter(adapter);
 
         //sets the layout manager, decoration and animation for correcty implementation of recyclerview ( recycler require that)
-        list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        list.setItemAnimator(new DefaultItemAnimator());
-        list.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
-        //list.setHasFixedSize(true);
+        //list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        //list.setLayoutManager(new GridLayoutManager(this, 3));
+        list.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        list.setItemAnimator(new DefaultItemAnimator()); //important, when add or remove item from list, it animates
+        list.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST)); //optional
+        list.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST)); //optional
+        //list.setHasFixedSize(true); //with this parameter, list performance are more quick (recomended)
 
-
+        /******  Floating Action Button      **************/
+        btnFab = (FloatingActionButton)findViewById(R.id.btnFab);
+        btnFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Esto es una prueba", Snackbar.LENGTH_LONG).show();
+                Intent i = new Intent(ProfileActivity.this, Activity_NestedScroll_Sample.class);
+                startActivity(i);
+            }
+        });
+        btnFab.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Snackbar.make(v, "TEST", Snackbar.LENGTH_SHORT).show();
+                list.setLayoutManager(new LinearLayoutManager(ProfileActivity.this, LinearLayoutManager.VERTICAL, false));
+                return true;
+            }
+        });
 
     }
 
@@ -172,7 +192,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Synchronous
         Palette p = Palette.from(bitmapImage).generate();
-        int color = p.getVibrantColor(Color.BLACK); // BLACK iS DEFAULT COLOR IF OTHER FAILS
+        int vibrantColor = p.getVibrantColor(Color.BLACK); // BLACK iS DEFAULT COLOR IF OTHER FAILS
 
         /* Asynchronous
         Palette.from(bitmap).generate(new PaletteAsyncListener() {
@@ -181,7 +201,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });*/
 
-        return color;
+        return vibrantColor;
 
     }
 }
