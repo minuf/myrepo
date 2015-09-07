@@ -2,12 +2,9 @@ package com.minuf.example.material.activities;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.drawer_main_activity);
 
 
-             showStatusBarTint();
+        showStatusBarTint();
 
 
         showAppBarAndNavigationDrawer();
@@ -125,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         /**Menu del Navigation Drawer (ListView)**/
         ndList = (ListView)findViewById(R.id.navdrawerlist);
 
-        final String[] opciones = new String[]{"Elevation pre-L sample", "Staggered Grid Layout Sample", "Option 3"};
+        final String[] opciones = new String[]{"Elevation pre-L sample", "Staggered Grid Layout", "Dialogs", "Components", "Ripple Effect Pre-L"};
 
         ArrayAdapter<String> ndMenuAdapter =
                 new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1, opciones);
@@ -141,9 +139,17 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 1:
                         Snackbar.make(view, "Option 2", Snackbar.LENGTH_SHORT).show();
+
                         break;
                     case 2:
                         Snackbar.make(view, "Option 3", Snackbar.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, Activity_MaterialDialogLibrary.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(MainActivity.this, Activity_Components_ReyLibrary.class));
+                        break;
+                    case 4:
+                        startActivity(new Intent(MainActivity.this, Activity_Ripple_Effect_PreLollipop.class));
                         break;
                     default:
                 }
@@ -151,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
                 getSupportActionBar().setTitle(opciones[position]);
 
-                drawerLayout.closeDrawer(sifl);
+                //drawerLayout.closeDrawer(sifl);
             }
         });
         ndList.setAdapter(ndMenuAdapter);
@@ -183,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            startActivity(intent, options.toBundle());  // For starting an activity
+                            startActivity(intent, options.toBundle());  // For starting an activity 310ms later
 
                             // Or for doing a fragment transaction
                             // fragmentTransaction.commit();
@@ -255,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /** SET COLOR FOR STATUSBAR USING STATUSBARTINT LIBRARY
-     * FOR LESS LOLLIPOP VERSION AND NATIVE FOR LOLLIPOP OR OVER
+     * FOR PRE LOLLIPOP VERSION AND NATIVE FOR LOLLIPOP OR OVER
      *
      CAUTION: With StatusBarTint library usage, CHANGE STATUS BAR FOR ALL SYSTEM (ALL APP ACTIVITIES) */
 
@@ -263,6 +269,7 @@ public class MainActivity extends AppCompatActivity {
     public void showStatusBarTint(){
 
         if (DEVICE_SDK >= Build.VERSION_CODES.KITKAT && DEVICE_SDK < Build.VERSION_CODES.LOLLIPOP) {
+
             //FOR SHOW STATUSBAR COORECTLY WITH COORDINATORLAYOUT AND APPBAR, NEEDS TO SET PADDING (STATUSBAR HEIGHT) TO COORDINATORLAYOUT
             int statusBarHeight = getStatusBarHeight(); //CUSTOM METHOD FOR GET STATBAR HEIGHT IN PIXELS
             cl = (CoordinatorLayout)findViewById(R.id.coordlayout);
@@ -276,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
             // enable status bar tint
             mTintManager.setStatusBarTintEnabled(true);
             //mTintManager.setStatusBarTintColor(Color.parseColor("#388E3C"));
-            mTintManager.setTintColor(Color.parseColor("#4CAF50"));//LIKE PRIMARY DARK COLOR
+            mTintManager.setTintColor(Color.parseColor("#4CAF50"));//GREEN LIKE PRIMARY DARK COLOR
                         /*************/
         } else if (DEVICE_SDK >= Build.VERSION_CODES.LOLLIPOP) {
             setStatusBarColorLOLLIPOP();
@@ -290,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(Color.RED);
     }
-    //GETS STATUSBARHEIGHT IN PIXELS
+    //GETS STATUSBARHEIGHT IN "PIXELS"
     public int getStatusBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");

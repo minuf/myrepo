@@ -1,9 +1,13 @@
 package com.minuf.example.material.activities;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -20,6 +24,7 @@ public class Activity_ElevationShadow_NinePath_Sample extends AppCompatActivity 
 
     SeekBar mSeekBarElevation;
     TextView tv_progress;
+    Button btn3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,8 @@ public class Activity_ElevationShadow_NinePath_Sample extends AppCompatActivity 
         final MaterialShadowContainerView shadowView2 = (MaterialShadowContainerView)
                 findViewById(R.id.shadow_item_container2);
 
+        btn3 = (Button)findViewById(R.id.button3);
+
         mDisplayDensity = getResources().getDisplayMetrics().density;
 
         tv_progress = (TextView)findViewById(R.id.tv_currentelevation);
@@ -40,13 +47,19 @@ public class Activity_ElevationShadow_NinePath_Sample extends AppCompatActivity 
         mSeekBarElevation.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tv_progress.setText("" + progress / 100);
+                tv_progress.setText("" + progressToTranslationZAmount(progress)+" px \n "+(progress/100)+" DP");
 
                 switch (seekBar.getId()) {
                     case R.id.seekBar:
                         if (fromUser) {
                             shadowView.setShadowTranslationZ(progressToTranslationZAmount(progress));
                             shadowView2.setShadowElevation(progressToTranslationZAmount(progress));
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                                setElevationLollipop(btn3, progress);
+                            } else {
+
+                            }
                         }
                         break;
                 }
@@ -63,8 +76,6 @@ public class Activity_ElevationShadow_NinePath_Sample extends AppCompatActivity 
 
             }
         });
-
-
     }
 
     @Override
@@ -91,5 +102,10 @@ public class Activity_ElevationShadow_NinePath_Sample extends AppCompatActivity 
 
     private float progressToTranslationZAmount(int progress) {
         return MAX_TRANSLATION_Z * mDisplayDensity * progress / SEEKBAR_MAX;
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setElevationLollipop(View v, int progress){
+        v.setElevation(progressToTranslationZAmount(progress));
     }
 }

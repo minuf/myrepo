@@ -6,28 +6,46 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/seekBar"
-        android:layout_weight="1" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/tv_currentelevation"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Shadow Translation Z"
+            android:id="@+id/textView2"
+            android:layout_weight="1"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Shadow Elevation"
+            android:id="@+id/textView3"
+            android:layout_weight="1"
+            android:gravity="center"/>
+    </LinearLayout>
+
 
     <LinearLayout
-        android:layout_marginTop="40dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_weight="1">
-
 
         <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -38,7 +56,6 @@
             android:layout_height="wrap_content"
             app:ms9_shadowTranslationZ="2dp"
             app:ms9_shadowElevation="4dp"
-            android:layout_marginLeft="30dp"
             >
 
         <Button
@@ -71,4 +88,44 @@
                 />
         </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Native Shadow LOLLIPOP ONLY"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="5dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button3"
+
+            />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button4"
+        style="?android:attr/borderlessButtonStyle"
+
+        />
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_weight="1"
+        android:layout_marginTop="70dp"/>
 </LinearLayout>

@@ -12,6 +12,13 @@
     <string name="title_activity_activity__elevation_shadow__nine_path__sample">
         ElevationShadow_Sample
     </string>
+    <string name="title_activity_activity__material_dialog_library">Activity_MaterialDialogLibrary
+    </string>
+    <string name="title_activity_activity__ripple__effect__pre_lollipop">
+        Activity_Ripple_Effect_PreLollipop
+    </string>
+    <string name="title_activity_activity__components__rey_library">Activity_Components_ReyLibrary
+    </string>
 
 
 </resources>

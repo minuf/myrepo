@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity"
-    android:id="@+id/coordlayout">
+    android:id="@+id/coordlayout"
+    >
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbarLayout"

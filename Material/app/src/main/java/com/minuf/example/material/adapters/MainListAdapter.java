@@ -62,6 +62,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ItemVi
 
         //Animation animation = AnimationUtils.loadAnimation(context, (i > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        //Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+
         animation.setDuration(150);
         itemViewHolder.itemView.startAnimation(animation);
         lastPosition = i;

@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="BrowseContentButton" parent="ms9_CompositeShadowStyleCompatOnly">
+        <item name="android:textColor">@color/color_primary_dark</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+</resources>

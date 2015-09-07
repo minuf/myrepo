@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center">
+
+
+    <com.andexert.library.RippleView
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:actionBarSize"
+        android:layout_margin="5dp"
+        rv_centered="true">
+
+        <ImageView
+            android:id="@+id/rpv"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:src="@android:drawable/ic_menu_edit"
+            android:layout_centerInParent="true"
+            android:padding="10dp"
+            android:background="@color/color_primary"/>
+
+    </com.andexert.library.RippleView>
+
+    <com.andexert.library.RippleView
+        android:id="@+id/more2"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:actionBarSize"
+        android:layout_margin="5dp"
+        rv_centered="true" app:rv_color="@color/color_primary" app:rv_zoom="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:src="@android:drawable/ic_menu_edit"
+            android:layout_centerInParent="true"
+            android:padding="10dp"
+            android:background="@color/color_accent"/>
+
+    </com.andexert.library.RippleView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Boton con custom style, no funciona el ripple pero si el style"
+        style="@style/BrowseContentButton"/>
+
+
+</LinearLayout>

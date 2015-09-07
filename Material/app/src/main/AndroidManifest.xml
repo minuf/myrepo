@@ -35,6 +35,18 @@
             android:name=".activities.Activity_ElevationShadow_NinePath_Sample"
             android:label="@string/title_activity_activity__elevation_shadow__nine_path__sample" >
         </activity>
+        <activity
+            android:name=".activities.Activity_MaterialDialogLibrary"
+            android:label="@string/title_activity_activity__material_dialog_library" >
+        </activity>
+        <activity
+            android:name=".activities.Activity_Ripple_Effect_PreLollipop"
+            android:label="@string/title_activity_activity__ripple__effect__pre_lollipop" >
+        </activity>
+        <activity
+            android:name=".activities.Activity_Components_ReyLibrary"
+            android:label="@string/title_activity_activity__components__rey_library" >
+        </activity>
     </application>
 
 </manifest>

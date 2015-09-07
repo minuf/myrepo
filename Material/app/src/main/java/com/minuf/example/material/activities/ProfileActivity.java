@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import com.minuf.example.material.R;
 import com.minuf.example.material.adapters.List2_Profile_Adapter;
 import com.minuf.example.material.anim_deco.DividerItemDecoration;
+import com.minuf.example.material.classes.GlobalSingleton;
 import com.minuf.example.material.items_struc.ItemList2_Structure;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -58,9 +59,10 @@ public class ProfileActivity extends AppCompatActivity {
         /** LOAD IMAGE FROM URL WITH PICASSO LIBRARY  **/
         iv_profile = (ImageView)findViewById(R.id.iv_profileToolbar);
 
-        Picasso.with(this)
+        GlobalSingleton.getInstance().loadImageFromPicasso(this, iv_profile);
+       /** Picasso.with(this)
                 .load("http://whosbehindmask.weebly.com/uploads/2/8/3/6/28365549/5831103_orig.jpg")    //http://viralandscdn.net/posts/13668/image-sg3SqUON.jpg
-                .into(iv_profile);
+                .into(iv_profile);*/
         //LISTENER
         final Intent intent = new Intent(ProfileActivity.this, Activity_FullScreenPhoto.class);
         if (DEVICE_SDK >= Build.VERSION_CODES.LOLLIPOP) {
@@ -163,18 +165,10 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
             /* Save the bitmap or do something with it here / Ya podemos recoger el bitmap de la imagen leida por Picasso desde el primer parametro de entrada */
-                /**SCRIPT FOR GET COLOR FROM IMAGE (LOLLIPOP)**/
-                // Synchronous
-                Palette p = Palette.from(bitmap).generate();
-                int color = getVibrantColorFromImage(bitmap);
+
+                int color = getVibrantColorFromImage(bitmap);//Custom method for load vibrant color from image
                 window.setStatusBarColor(color);
 
-                /* Asynchronous
-                Palette.from(bitmap).generate(new PaletteAsyncListener() {
-                    public void onGenerated(Palette p) {
-                        // Use generated instance
-                    }
-                });*/
             }
 
             @Override
