@@ -1,6 +1,7 @@
 package com.minuf.example.material.activities;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
@@ -14,7 +15,6 @@ import android.widget.ImageView;
 
 import com.minuf.example.material.R;
 import com.squareup.picasso.Picasso;
-
 public class Activity_FullScreenPhoto extends AppCompatActivity {
 
     FloatingActionButton fab;
