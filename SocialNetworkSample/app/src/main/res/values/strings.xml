@@ -3,4 +3,12 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="seccion_1">Seccion 1</string>
+    <string name="seccion_2">Seccion 2</string>
+    <string name="seccion_3">Seccion 3</string>
+    <string name="otras_opciones">Otras opciones:</string>
+    <string name="opcion_1">Opcion 1:</string>
+    <string name="opcion_2">Opcion 2:</string>
+
+
 </resources>
