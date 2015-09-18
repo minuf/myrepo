@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.minuf.minuf.socialnetworksample.R;
 import com.minuf.minuf.socialnetworksample.anim_deco.DividerItemDecoration;
 import com.minuf.minuf.socialnetworksample.classes.MyApplication_Singleton;
-import com.minuf.minuf.socialnetworksample.items_struc.ItemList1_Structure;
 import com.minuf.minuf.socialnetworksample.items_struc.ItemList_Post;
 import com.minuf.minuf.socialnetworksample.views.RoundedImageView;
 import com.squareup.picasso.Picasso;

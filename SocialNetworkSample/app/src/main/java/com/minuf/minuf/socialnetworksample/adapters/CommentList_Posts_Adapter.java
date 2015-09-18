@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.minuf.minuf.socialnetworksample.R;
 import com.minuf.minuf.socialnetworksample.classes.MyApplication_Singleton;
-import com.minuf.minuf.socialnetworksample.items_struc.ItemList1_Structure;
+import com.minuf.minuf.socialnetworksample.items_struc.ItemList_PostComment;
 import com.minuf.minuf.socialnetworksample.views.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class CommentList_Posts_Adapter extends RecyclerView.Adapter<CommentList_Posts_Adapter.ItemViewHolder> implements View.OnClickListener{
 
-    private ArrayList<ItemList1_Structure> arrayData;
+    private ArrayList<ItemList_PostComment> arrayData;
     private static Context context;
 
     View itemView;
@@ -55,7 +55,7 @@ public class CommentList_Posts_Adapter extends RecyclerView.Adapter<CommentList_
     public void onBindViewHolder(ItemViewHolder itemViewHolder, int i) {
 
         //get item from her ArrayList position and bind calling custom method bindItem(item);
-        ItemList1_Structure item = arrayData.get(i);
+        ItemList_PostComment item = arrayData.get(i);
 
         itemViewHolder.bindItem(item);
     }
@@ -92,7 +92,7 @@ public class CommentList_Posts_Adapter extends RecyclerView.Adapter<CommentList_
             tv_subtitle = (TextView)itemView.findViewById(R.id.tv2_item_ist_comment);
         }
         //custom method for bind view with text content, that can be writted on override method 'onBindViewHolder()', but it only call this method for cleaner code
-        public void bindItem(ItemList1_Structure item) {
+        public void bindItem(ItemList_PostComment item) {
 
             tv_title.setText(item.getTxt_people_list());
             tv_subtitle.setText(item.getTxt2_people_list());

@@ -18,6 +18,7 @@ public class MyApplication_Singleton extends Application {
     private ArrayList<ItemList_PostComment> dataList = new ArrayList<>();
     private ArrayList<ItemList_Post> postDataList = new ArrayList<>();
     private ArrayList<ItemList_PostComment> comment_list = new ArrayList<>();
+    private ArrayList<ContactData> contactData = new ArrayList<>();
 
     public static MyApplication_Singleton getInstance() {
         return singleton;
@@ -31,6 +32,10 @@ public class MyApplication_Singleton extends Application {
         readData();
         readDataPostList();
         Log.e("TEST", "DATA READED FROM APPLICATION SINGLETON CLASS");
+    }
+
+    private void readContacts(){
+
     }
 
     private void readData(){
