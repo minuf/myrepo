@@ -1,4 +1,4 @@
-package com.minuf.minuf.socialnetworksample.adapters;
+package com.minuf.minuf.socialnetworksample.ui.adapters;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
@@ -18,10 +18,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.minuf.minuf.socialnetworksample.R;
-import com.minuf.minuf.socialnetworksample.anim_deco.DividerItemDecoration;
-import com.minuf.minuf.socialnetworksample.classes.MyApplication_Singleton;
-import com.minuf.minuf.socialnetworksample.items_struc.ItemList_Post;
-import com.minuf.minuf.socialnetworksample.views.RoundedImageView;
+import com.minuf.minuf.socialnetworksample.ui.anim_deco.DividerItemDecoration;
+import com.minuf.minuf.socialnetworksample.tools.classes.MyApplication_Singleton;
+import com.minuf.minuf.socialnetworksample.tools.items_struc.ItemList_Post;
+import com.minuf.minuf.socialnetworksample.ui.views.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

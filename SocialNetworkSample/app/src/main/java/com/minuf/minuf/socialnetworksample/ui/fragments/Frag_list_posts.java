@@ -1,8 +1,7 @@
-package com.minuf.minuf.socialnetworksample.fragments;
+package com.minuf.minuf.socialnetworksample.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,23 +11,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.minuf.minuf.socialnetworksample.R;
-import com.minuf.minuf.socialnetworksample.adapters.MainListAdapter;
-import com.minuf.minuf.socialnetworksample.anim_deco.DividerItemDecoration;
+import com.minuf.minuf.socialnetworksample.ui.adapters.MainList_Posts_Adapter;
+import com.minuf.minuf.socialnetworksample.ui.anim_deco.DividerItemDecoration;
 
 /**
- * Created by jorge on 9/09/15.
+ * Created by jorge on 11/09/15.
  */
-public class Frag_list_main extends Fragment {
+public class Frag_list_posts extends Fragment {
 
 
     //empty constructor
-    public Frag_list_main() {
+    public Frag_list_posts() {
     }
 
     //newinstance() method for create the fragments
-    public static Frag_list_main newInstance(){
+    public static Frag_list_posts newInstance(){
         //call constructor for create
-        Frag_list_main frag = new Frag_list_main();
+        Frag_list_posts frag = new Frag_list_posts();
         //create bundle and set args to fragment for rescue later
 
         return frag;
@@ -42,19 +41,36 @@ public class Frag_list_main extends Fragment {
 
 
         //CREATE ADAPTER, SETS ONCLICK AND SETS TO LIST
-        MainListAdapter adapter = new MainListAdapter();
-        adapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v, "Pulsado el item: " + (1 + list.getChildAdapterPosition(v)), Snackbar.LENGTH_SHORT).show();
-            }
-        });
-        list.setAdapter(adapter);
+        MainList_Posts_Adapter adapter = new MainList_Posts_Adapter();
+
+        list.swapAdapter(adapter, true);
+        list.setHasFixedSize(true);
+
+        //list.getVerticalScrollbarPosition();
 
         //sets the layout manager, decoration and animation for correcty implementation of recyclerview ( recycler require that)
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         list.setItemAnimator(new DefaultItemAnimator());
         list.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+
+        final LinearLayoutManager llm = (LinearLayoutManager)list.getLayoutManager();
+
+
+        list.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+               // Log.e("STATE", "" + newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+               // Log.e("ITEM", ""+llm.findFirstCompletelyVisibleItemPosition());
+            }
+        });
+
+
 
         return list;
     }

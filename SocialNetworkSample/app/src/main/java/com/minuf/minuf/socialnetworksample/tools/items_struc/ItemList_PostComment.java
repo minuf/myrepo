@@ -1,6 +1,4 @@
-package com.minuf.minuf.socialnetworksample.items_struc;
-
-import android.widget.ImageView;
+package com.minuf.minuf.socialnetworksample.tools.items_struc;
 
 /**
  * Created by jorge on 9/09/15.

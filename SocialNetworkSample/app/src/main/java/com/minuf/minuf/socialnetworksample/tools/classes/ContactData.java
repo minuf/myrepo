@@ -1,4 +1,4 @@
-package com.minuf.minuf.socialnetworksample.classes;
+package com.minuf.minuf.socialnetworksample.tools.classes;
 
 /**
  * Created by jorge on 16/09/15.

@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".classes.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -46,6 +47,10 @@
         <activity
             android:name=".activities.Activity_Components_ReyLibrary"
             android:label="@string/title_activity_activity__components__rey_library" >
+        </activity>
+        <activity
+            android:name=".activities.Activity_ExpandCollapseItem"
+            android:label="@string/title_activity_activity__expand_collapse_item" >
         </activity>
     </application>
 

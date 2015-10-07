@@ -7,13 +7,13 @@
 
 
     <application
-        android:name=".classes.MyApplication_Singleton"
+        android:name=".tools.classes.MyApplication_Singleton"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +27,9 @@
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/app_name" />
+
+        <activity android:name=".ui.activities.ActivityHome"></activity>
+        <activity android:name=".ui.activities.FacebookActivitySample"></activity>
 
 
         <meta-data android:name="com.facebook.sdk.ApplicationId"

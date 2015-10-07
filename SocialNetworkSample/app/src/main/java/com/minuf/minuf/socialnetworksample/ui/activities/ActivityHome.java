@@ -1,4 +1,4 @@
-package com.minuf.minuf.socialnetworksample.activities;
+package com.minuf.minuf.socialnetworksample.ui.activities;
 
 import android.annotation.TargetApi;
 import android.graphics.Color;
@@ -18,9 +18,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.minuf.minuf.socialnetworksample.R;
-import com.minuf.minuf.socialnetworksample.adapters.FragmentsAdapter;
-import com.minuf.minuf.socialnetworksample.fragments.Frag_list_main;
-import com.minuf.minuf.socialnetworksample.fragments.Frag_list_posts;
+import com.minuf.minuf.socialnetworksample.ui.adapters.FragmentsAdapter;
+import com.minuf.minuf.socialnetworksample.ui.fragments.Frag_list_main;
+import com.minuf.minuf.socialnetworksample.ui.fragments.Frag_list_posts;
 
 public class ActivityHome extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class ActivityHome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         //setupWindowAnimations();  //enter and exit activity transitions
 

@@ -19,6 +19,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -29,6 +30,7 @@ import com.minuf.example.material.R;
 import com.minuf.example.material.adapters.List2_Profile_Adapter;
 import com.minuf.example.material.anim_deco.DividerItemDecoration;
 import com.minuf.example.material.classes.GlobalSingleton;
+import com.minuf.example.material.classes.MyApplication;
 import com.minuf.example.material.items_struc.ItemList2_Structure;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -52,6 +54,8 @@ public class ProfileActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+
 
         //SETSTATUSBARCOLOR CUSTOM METHOD
         if (DEVICE_SDK >= Build.VERSION_CODES.LOLLIPOP) setStatusBarColorLOLLIPOP();

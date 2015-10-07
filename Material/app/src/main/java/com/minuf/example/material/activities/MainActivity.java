@@ -2,6 +2,7 @@ package com.minuf.example.material.activities;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
+import android.app.Application;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +32,7 @@ import android.widget.ListView;
 
 import com.minuf.example.material.R;
 import com.minuf.example.material.adapters.FragmentsAdapter;
+import com.minuf.example.material.classes.MyApplication;
 import com.minuf.example.material.fragments.Frag_list_main;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.squareup.picasso.Picasso;
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_main_activity);
+
 
 
         showStatusBarTint();
@@ -123,7 +127,8 @@ public class MainActivity extends AppCompatActivity {
         /**Menu del Navigation Drawer (ListView)**/
         ndList = (ListView)findViewById(R.id.navdrawerlist);
 
-        final String[] opciones = new String[]{"Elevation pre-L sample", "Staggered Grid Layout", "Dialogs", "Components", "Ripple Effect Pre-L"};
+        final String[] opciones = new String[]{"Elevation pre-L sample", "Staggered Grid Layout",
+                "Dialogs", "Components", "Ripple Effect Pre-L", "Expandable Item (No library)"};
 
         ArrayAdapter<String> ndMenuAdapter =
                 new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1, opciones);
@@ -151,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
                     case 4:
                         startActivity(new Intent(MainActivity.this, Activity_Ripple_Effect_PreLollipop.class));
                         break;
+                    case 5:
+                        startActivity(new Intent(MainActivity.this, Activity_ExpandCollapseItem.class));
                     default:
                 }
                 ndList.setItemChecked(position, true);
@@ -309,4 +316,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     /******************     END UI METHODS     ****************/
+
+
+    //DONT WORKS
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setupWindowAnimations() {
+        Explode explode = new Explode();
+        explode.setDuration(2000);
+        getWindow().setEnterTransition(explode);
+        getWindow().setExitTransition(explode);
+    }
 }

@@ -1,11 +1,13 @@
-package com.minuf.minuf.socialnetworksample.activities;
+package com.minuf.minuf.socialnetworksample.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -20,15 +22,17 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.minuf.minuf.socialnetworksample.R;
+import com.minuf.minuf.socialnetworksample.tools.classes.MyApplication_Singleton;
+import com.minuf.minuf.socialnetworksample.tools.encryption.Encryption;
 
 /**
- * Created by jorge on 17/09/15.
+ * Created by jorge on 30/09/15.
  */
-public class MainActivity extends AppCompatActivity {
+public class FacebookActivitySample extends AppCompatActivity {
 
     private TextView info;
     private LoginButton loginButton;
-    private Button btn_logout, btn_perfil;
+    private Button btn_logout, btn_perfil, btn_enter_app;
 
     private CallbackManager callbackManager;
 
@@ -44,22 +48,24 @@ public class MainActivity extends AppCompatActivity {
         info = (TextView)findViewById(R.id.info);
 
 
+
         loginButton = (LoginButton)findViewById(R.id.login_button);
         btn_logout = (Button)findViewById(R.id.btn_logout);
         btn_perfil = (Button)findViewById(R.id.btn_perfil);
+        btn_enter_app = (Button)findViewById(R.id.btn_enter_app);
         btn_perfil.setVisibility(View.GONE);
 
+        //-loginButton.setReadPermissions(Arrays.asList("email"));
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                info.setText(
-                        "User ID: "
-                                + loginResult.getAccessToken().getUserId()
-                                + "\n" +
-                                "Auth Token: "
-                                + loginResult.getAccessToken().getToken()
-                );
+
+                MyApplication_Singleton.getInstance().setFACEBOOK_USER_ID(loginResult.getAccessToken().getUserId());
+                MyApplication_Singleton.getInstance().setFACEBOOK_USER_AUTH_TOKEN(loginResult.getAccessToken().getToken());
+
+                info.setText("User ID: " + loginResult.getAccessToken().getUserId() + "\nAuth Token: "
+                        + loginResult.getAccessToken().getToken());
 
                 btn_perfil.setVisibility(View.VISIBLE);
             }
@@ -94,7 +100,17 @@ public class MainActivity extends AppCompatActivity {
                 String imguriprofile = profile.getProfilePictureUri(20,20).toString();
                 String linkuri = profile.getLinkUri().toString();
 
-                info.setText("name: "+ firstName+"\nimg uri: "+imguriprofile+"\nlinkuri: "+linkuri);
+                info.setText("name: " + firstName + "\nimg uri: " + imguriprofile + "\nlinkuri: " + linkuri);
+            }
+        });
+
+        btn_enter_app.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FacebookActivitySample.this, "VIENVENIDO: ID=" + MyApplication_Singleton.getInstance().getFACEBOOK_USER_ID(),
+                        Toast.LENGTH_SHORT).show();
+
+                startActivity(new Intent(FacebookActivitySample.this, ActivityHome.class));
             }
         });
     }
@@ -123,9 +139,27 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }).executeAsync();
+
+        new GraphRequest(
+                AccessToken.getCurrentAccessToken(),"/{user-id}",null,HttpMethod.GET,new GraphRequest
+                .Callback() {
+            public void onCompleted(GraphResponse response) {
+
+            }
+        }
+        ).executeAsync();
     }
+
+
+
+
+
+
+
+
+
 }
-                                              //en vez de
+//instead = en vez de
 // GET THE REGISTERCALLBACK FROM LOGINMANAGER INSTEAD OF LOGINBUTTON
 /**LoginManager.getInstance().registerCallback(callbackManager,
  new FacebookCallback<LoginResult>() {

@@ -1,10 +1,12 @@
-package com.minuf.minuf.socialnetworksample.classes;
+package com.minuf.minuf.socialnetworksample.tools.classes;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.minuf.minuf.socialnetworksample.items_struc.ItemList_PostComment;
-import com.minuf.minuf.socialnetworksample.items_struc.ItemList_Post;
+import com.minuf.minuf.socialnetworksample.tools.items_struc.ItemList_PostComment;
+import com.minuf.minuf.socialnetworksample.tools.items_struc.ItemList_Post;
 
 import java.util.ArrayList;
 
@@ -12,6 +14,11 @@ import java.util.ArrayList;
  * Created by jorge on 9/09/15.
  */
 public class MyApplication_Singleton extends Application {
+
+    private String FACEBOOK_USER_ID;
+    private String FACEBOOK_USER_AUTH_TOKEN;
+
+    private SharedPreferences prefs;// = getSharedPreferences("user_preferences", Context.MODE_PRIVATE);
 
     private static MyApplication_Singleton singleton;
 
@@ -91,4 +98,27 @@ public class MyApplication_Singleton extends Application {
     }
 
 
+    //GETTERS AND SETTERS
+
+    public String getFACEBOOK_USER_ID() {
+        return FACEBOOK_USER_ID;
+    }
+
+    public void setFACEBOOK_USER_ID(String FACEBOOK_USER_ID) {
+        this.FACEBOOK_USER_ID = FACEBOOK_USER_ID;
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("ID", FACEBOOK_USER_ID);
+        editor.commit();
+    }
+
+    public String getFACEBOOK_USER_AUTH_TOKEN() {
+        return FACEBOOK_USER_AUTH_TOKEN;
+    }
+
+    public void setFACEBOOK_USER_AUTH_TOKEN(String FACEBOOK_USER_AUTH_TOKEN) {
+        this.FACEBOOK_USER_AUTH_TOKEN = FACEBOOK_USER_AUTH_TOKEN;
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("AUTH_TOKEN", FACEBOOK_USER_AUTH_TOKEN);
+        editor.commit();
+    }
 }

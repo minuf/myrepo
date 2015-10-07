@@ -14,6 +14,7 @@ public class Activity_Ripple_Effect_PreLollipop extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__ripple__effect__pre_lollipop);
 
+
     }
 
     @Override

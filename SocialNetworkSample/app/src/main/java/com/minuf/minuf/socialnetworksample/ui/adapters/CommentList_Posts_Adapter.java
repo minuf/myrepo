@@ -1,4 +1,4 @@
-package com.minuf.minuf.socialnetworksample.adapters;
+package com.minuf.minuf.socialnetworksample.ui.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.minuf.minuf.socialnetworksample.R;
-import com.minuf.minuf.socialnetworksample.classes.MyApplication_Singleton;
-import com.minuf.minuf.socialnetworksample.items_struc.ItemList_PostComment;
-import com.minuf.minuf.socialnetworksample.views.RoundedImageView;
+import com.minuf.minuf.socialnetworksample.tools.classes.MyApplication_Singleton;
+import com.minuf.minuf.socialnetworksample.tools.items_struc.ItemList_PostComment;
+import com.minuf.minuf.socialnetworksample.ui.views.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

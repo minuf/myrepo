@@ -1,4 +1,4 @@
-package com.minuf.minuf.socialnetworksample.items_struc;
+package com.minuf.minuf.socialnetworksample.tools.items_struc;
 
 import java.util.ArrayList;
 

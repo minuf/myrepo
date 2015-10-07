@@ -1,4 +1,4 @@
-package com.minuf.minuf.socialnetworksample.views;
+package com.minuf.minuf.socialnetworksample.ui.views;
 
 import android.content.Context;
 import android.graphics.Bitmap;

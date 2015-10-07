@@ -1,4 +1,4 @@
-package com.minuf.minuf.socialnetworksample.adapters;
+package com.minuf.minuf.socialnetworksample.ui.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

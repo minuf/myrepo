@@ -1,4 +1,4 @@
-package com.minuf.minuf.socialnetworksample.anim_deco;
+package com.minuf.minuf.socialnetworksample.ui.anim_deco;
 
 /**
  * Created by jorge on 7/08/15.
