@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,9 +15,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.minuf.mynodeproyectclient.R;
+import com.minuf.mynodeproyectclient.tools.Constants;
 import com.minuf.mynodeproyectclient.tools.MySingletonVolley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final TextView mTextView = (TextView) findViewById(R.id.text);
+        final TextView mTextView = (TextView) findViewById(R.id.tv_text);
         // Instantiate the RequestQueue.
         //RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://www.google.com";
+        /**String url ="https://developer.android.com/training/volley/simple.html";
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -57,13 +64,39 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        /* Get a RequestQueue
-        RequestQueue queue = MySingletonVolley.getInstance(this.getApplicationContext()).
-                getRequestQueue();
-        */
+        // Get a RequestQueue
+        //RequestQueue queue = MySingletonVolley.getInstance(this.getApplicationContext()).
+         //       getRequestQueue();
+
 
     // Add a request (in this example, called stringRequest) to your RequestQueue.
-        MySingletonVolley.getInstance(this).addToRequestQueue(stringRequest);
+        MySingletonVolley.getInstance(this).addToRequestQueue(stringRequest); **/
+
+        // Petición GET
+        MySingletonVolley.
+                getInstance(this).
+                addToRequestQueue(
+                        new JsonArrayRequest(
+                                Request.Method.GET,
+                                Constants.GET,
+                                new Response.Listener<JSONArray>() {
+
+                                    @Override
+                                    public void onResponse(JSONArray response) {
+                                        // Procesar la respuesta Json
+                                        Log.e("PETICION CORRECTA", "ALL USERS\n"+response.toString());
+                                        mTextView.setText(response.toString());
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.e("ERROR : ", "Error Volley: " + error.getMessage());
+                                    }
+                                }
+
+                        )
+                );
     }
 
     @Override
