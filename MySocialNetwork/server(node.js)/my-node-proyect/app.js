@@ -5,7 +5,7 @@ var express         = require("express"),
     mongoose        = require('mongoose');
 
 //connection to DB
-mongoose.connect('mongodb://localhost/myusersdb', function(err, res) {
+mongoose.connect('mongodb://localhost/mysocialnetwork', function(err, res) {
 	if (err) console.log('Error conectando a la BD' + err);
 	else console.log('Connection a la BD realizada');
 });
@@ -23,12 +23,18 @@ router.get('/', function(req, res) {
 app.use(router); */
 
 
-//without router
+//add routes here, without reference
 app.get('/', function(req, res) {
-	res.send('Hola Mundo');
+	res.send('My Social Network Server RUNNING!!!');
 });
-//add routes
-require('./routes/routes')(app);
+
+// redirect example
+app.get('/a', function(req, res) {
+	res.redirect('/');
+});
+//add routes reference
+require('./routes/routes-user')(app);
+require('./routes/routes-contact')(app);
 
 app.listen(5000);
 console.log('Servidor Express escuchando puerto 5000');

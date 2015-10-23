@@ -1,7 +1,7 @@
 {
 	"name": "APIRest",
 	"version": "0.0.1",
-	"description": "Ejemplo de API RestFul",
+	"description": "Social Network API RestFul",
 	"main": "app.js",
 	"dependencies": {
     "mongoose": "~3.6.11",
@@ -10,7 +10,6 @@
     "method-override": "^2.1.2",
     "body-parser": "^1.5.1",
     "nodemailer":"~0.6.3",
-	"crypto":"~0.0.3",
-	"gravatar":"~1.0.6"
+	"crypto":"~0.0.3"
   }
 } 

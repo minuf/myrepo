@@ -7,19 +7,10 @@
 
 module.exports = function(app) {
 
+	var login = require('./routes-login')(app);
 
-	addContact = function(req, res, callback) {
-		var contact = new Contact({
-			id_user: req.body.id_user,
-			id_contacts: req.body.id_contacts
-		});
-
-		contact.save(function (err) {
-			if (!err) callback("SAVED "+contact);
-		});
-	}
 	
-
+/*
 	//GET ALL
 	getAllUsers = function(req, res, callback) {
 		User.find(function(err, users) {
@@ -35,17 +26,44 @@ module.exports = function(app) {
 			else console.log('ERROR' + err);
 		});
 	};
-
+*/
 	//POST (FIND)BY EMAIL
 	findByEmail = function(req, res, callback) {
-		User.find({email:req.body.email}, function(err, user) {
-			if (!err) callback({"user":user});
-			else console.log('ERROR' + err);
+		
+		checkTokenLogin(req, res, function(found) {
+			var result = found.res;                  
+			console.log(result);
+			if (result == true){
+				User.find({email:req.body.email},
+					{hashed_password:0, salt:0, token:0, token_created:0}, //el segundo parametro json es para limitar o excluir los elementos que se mostraran , en este caso, el valor para hassed_password y salt es 0, con lo que no lo incluira en el json resultante.
+					function(err, user) { 
+						if (!err)callback({"user":user});			
+						else console.log('ERROR' + err);
+					});
+			}else {
+				callback("token error: "+result);
+			}
 		});
-	};
+	}
 
-	//PUT (Update)first_name
-	updateFirstName = function(req, res, callback){
+	//PUT (Update)profile
+	updateProfile = function(req, res, callback){
+
+		checkTokenLogin(req, res, function(found) {
+			var result = found.res;                  
+			console.log(result);
+			if (result == true){
+				User.update({email:req.body.email}, 
+					{$set: {profile:req.body.profile}},
+					 function(err, user) {
+					if(!err) callback({"user": user});
+					else callback({"error ":+err});
+				});
+			}else {
+				callback("token error: "+result);
+			}
+		});
+	
 		// este script encuentra un registro en funcion de su email, le asigna la nueva variable a profile.first_name y la guarda (user.save())
 		/**User.findOne({email:req.body.email}, function(err, user) {
 			user.profile.first_name = req.body.first_name;
@@ -66,37 +84,30 @@ module.exports = function(app) {
 		//UPDATE FULL USER
 		// este script actualiza un User con todos los campos descritos en el objeto json incluido en la consulta(req.body)
 		// cuidado con este script..actualiza el user entero
-		User.update({email:req.body.email}, 
-			{$set: req.body},
+		/*User.update({email:req.body.email}, 
+			{$set: {req.body}},
 			 function(err, user) {
 			if(!err) callback({"user": user});
 			else callback({"error ":+err});
-		});
+		});*/
 	}
 
-	// PUT (Update)
-	updatePass = function(req, res, callback) {
-		User.find({email:req.params.email}, function(err, user) {
-			//user.password = req.body.password;			
-
-
-			/*user.save(function(err) {
-				if(!err) console.log('Password Actualizado');
-				else console.log('ERROR:' + err);
-			});*/
-
-			callback("\n**** METODO NO IMPLEMENTADO ****\n\n"+user); //res.send(user);
-		});
-
-		
-	};
 
 	//DELETE
 	deleteUser = function(req, res, callback) {
-		User.remove({email: req.params.email}, function(err) {
-			if(!err) callback({"deleted":"ok"});
-				else callback('ERROR' +err);
+		checkTokenLogin(req, res, function(found) {
+			var result = found.res;                  
+			console.log(result);
+			if (result == true){
+				User.remove({email: req.body.email}, function(err) {
+					if(!err) callback({"deleted":"ok"});
+					else callback('ERROR' +err);
+				});
+			}else {
+				callback("token error: "+result);
+			}
 		});
+		
 		/*User.findById(req.params.id, function(err, user) {
 			user.remove(function(err) {
 				if(!err) console.log('User Borrado');
@@ -108,7 +119,7 @@ module.exports = function(app) {
 	};
 
 	// Routes
-
+/*
 	//getAll (read)
 	app.get('/users', function(req, res) {
 		getAllUsers(req, res, function(found) {
@@ -123,42 +134,30 @@ module.exports = function(app) {
 			res.send(found);
 		});
 	});
+*/
+	
 
-	//get by email...json (find(json)) (read) 
-	app.post('/users/getbyemail/', function(req, res) {
-		findByEmail(req, res, function(found) {
-			res.json(found);
-		});
-	});
+	
 
-	//post new user (create)
-	app.post('/contacts', function(req, res) {
-		addContact(req, res, function(found) {
-			res.json(found);
-		});
-	});
-
-	//put (update)first_name
+	//put (update)profile
 	app.put('/users/', function(req, res) {
-		updateFirstName(req, res, function(found) {
-			res.send(found);
-		})
-	})
-
-	//put (update)existent user (update)  //NO IMPLEMENTADO
-	app.put('/users/:email', function(req, res) {
-		updatePass(req, res, function(found) {
+		updateProfile(req, res, function(found) {
 			res.send(found);
 		});
 	});
 
 	//delete user (delete)
-	app.delete('/users/:email', function(req, res) {
+	app.delete('/users/', function(req, res) {
 		deleteUser(req, res, function(found) {
 			res.send(found);
 		});
 	});
 
-	
+	//get by email...json (find(json)) (read) 
+	app.post('/users/', function(req, res) {
+		findByEmail(req, res, function(found) {
+			res.json(found);
+		});
+	});	
 
 }
