@@ -3,6 +3,7 @@ package com.minuf.minuf.socialnetworksample.tools.classes;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.minuf.minuf.socialnetworksample.tools.items_struc.ItemList_PostComment;
@@ -41,8 +42,9 @@ public class MyApplication_Singleton extends Application {
         Log.e("TEST", "DATA READED FROM APPLICATION SINGLETON CLASS");
     }
 
-    private void readContacts(){
-
+    private String getDeviceID(){
+        final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+        return tm.getDeviceId()+"";     //needs to add permissions on manifest to use this. READ_PHONE_STATE
     }
 
     private void readData(){
