@@ -1,5 +1,6 @@
 package com.minuf.minuf.socialnetworksample.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -100,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!email.isEmpty() && !pass.isEmpty()){
             //log in
+            startActivity(new Intent(this, ActivityHome.class));
         }else {
             Snackbar.make(v, "Falta algún dato.", Snackbar.LENGTH_SHORT).show();
         }

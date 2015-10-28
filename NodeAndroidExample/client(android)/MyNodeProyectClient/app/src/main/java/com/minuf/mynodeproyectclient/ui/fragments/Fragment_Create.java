@@ -35,8 +35,7 @@ public class Fragment_Create extends Fragment{
 
 
     //empty constructor
-    public Fragment_Create() {
-    }
+    public Fragment_Create() {}
 
     @Nullable
     @Override
@@ -86,6 +85,7 @@ public class Fragment_Create extends Fragment{
 
         // Depurando objeto Json...
         Log.d("OBJETO A GUARDAR: ", jobject.toString());
+
 
         // Actualizar datos en el servidor
         MySingletonVolley.getInstance(getActivity()).addToRequestQueue(

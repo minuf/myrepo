@@ -35,6 +35,7 @@ app.get('/a', function(req, res) {
 //add routes reference
 require('./routes/routes-user')(app);
 require('./routes/routes-contact')(app);
+require('./routes/routes-post')(app);
 
 app.listen(5000);
 console.log('Servidor Express escuchando puerto 5000');

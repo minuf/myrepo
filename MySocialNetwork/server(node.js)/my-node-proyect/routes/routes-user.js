@@ -1,8 +1,5 @@
 
 	var User = require('../models/user-model');
-	var Contact = require('../models/contact-model');
-	var crypto = require('crypto');
-	var rand = require('csprng');
 
 
 module.exports = function(app) {
@@ -46,7 +43,7 @@ module.exports = function(app) {
 		});
 	}
 
-	//PUT (Update)profile
+	//PUT (Update)profile   //CAUTION: if no especified fields in request (profile.name for example), this REPLACES ALL PROFILE FIELDS
 	updateProfile = function(req, res, callback){
 
 		checkTokenLogin(req, res, function(found) {

@@ -18,24 +18,11 @@ module.exports = function(app) {
 			if (result == true){
 				var id_user = found.user_id;
 				console.log(id_user);
-				Contact.update({"id_user":id_user},
+				Contact.update({"_id":id_user},
 					{$addToSet: {contacts:req.body.contact}},{upsert:true},
 					function(err, result) {
 						if(!err) {
-							if (result == 0) {
-								var newContact = new Contact({
-									id_user: id_user,
-									contacts: 
-										{
-										_id:req.body.contact.id_contact, 
-										role:req.body.contact.role
-										}
-								});
-								newContact.save(function(err) {
-									if(!err) res.send({"Result":"Insertado con exito"});
-									else console.log({"Error":err});
-								});
-							}
+							console.log({'id_contact':req.body.contact._id});							
 							callback({"Result":result});
 						}
 						else callback({"Error adding contact ":err});
@@ -73,7 +60,7 @@ module.exports = function(app) {
 			console.log(result);
 			if (result == true) {
 				var id_user = found.user_id;
-				Contact.find({id_user:id_user}, function(err, contacts) {
+				Contact.find({_id:id_user},{_id:0}, function(err, contacts) {
 					if (!err) callback(contacts);
 					else callback({"error ":err});
 				});
